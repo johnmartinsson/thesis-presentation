@@ -104,6 +104,19 @@
               \[ \text{if } \Phi(x) \neq \Phi(x') \text{ then } f(x) \neq f(x') \]
             </div>
           </section>
+          <section>
+            <h2> Feature Extraction </h2>
+            <div>
+              \[
+              \begin{aligned}
+              \text{if } &amp; \Phi((x, y)) = x \text{ and } f((x, y)) = y \\
+              \text{ then } &amp; \Phi((1, 3)) \neq \Phi(2, 3) \\
+              \text{ but } &amp; f((1, 3)) = f((2, 3))
+              \end{aligned}
+              \]
+            </div>
+          </section>
+
         </section>
         <section>
           <h2> Aim & Questions </h2>
@@ -123,18 +136,30 @@
             </li>
           </ul>
         </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Data set
+            - BirdCLEF 2016
+            - 24,600 training files
+            - 8,600 test files
+            - 999 different bird species
+            - Field recordings
+            - Can contain background species
+          </script>
+        </section>
         <section>
           <section data-markdown>
             <script type="text/template">
               ## Baseline
               - Preprocessing
               - Data augmentation
-              - Convolutional neural network
+              - Feature extraction
+              - Signal classification
             </script>
           </section>
           <section>
-            <h2> Preprocessing </h2>
-            <img src="images/sprengel_binary_mask.png" height="50%" width ="50%">
+            <h4> Preprocessing </h4>
+            <img src="images/sprengel_binary_mask.png" height="40%" width ="40%">
           </section>
           <section data-markdown>
             <script type="text/template">
@@ -152,6 +177,11 @@
           <section>
             <h2> Noise Augmentation </h2>
             <img src="images/noise_augmentation.png" height="50%" width ="50%">
+          </section>
+          <section>
+            <h2> Feature Extraction </h2>
+            <p> Logarithmic spectrogram </p>
+            <img src="images/logspectrogram.png" height="50%" width="50%">
           </section>
           <section data-markdown>
             <script type="text/template">
@@ -171,27 +201,43 @@
             <script type="text/template">
               ## Methods
 
-              - Deep Residual Neural Networks
-              - Multiple-Width Frequency-Delta Data Augmentation
-              - Meta-Data Fusion
+              - Deep residual neural networks
+              - Multiple-width frequency-delta data augmentation
+              - Meta-data fusion
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## Deep Residual Neural Networks
+              ## Deep residual neural networks
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## Multiple-Width Frequency-Delta Data Augmentation
+              ## Multiple-width frequency-delta data augmentation
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## Meta-Data Fusion
+              ## Meta-data fusion
             </script>
           </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Results
 
+              - Deep residual neural networks
+              - Meta-data fusion
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Discussion
+            </script>
+          </section>
         </section>
 			</div>
 		</div>
