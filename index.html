@@ -6,6 +6,7 @@
 
 		<title>reveal.js</title>
 
+		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/solarized.css">
 
@@ -25,12 +26,12 @@
 		<div class="reveal">
 			<div class="slides">
 				<section data-markdown>
-          <script type=text/template">
+          <script type="text/template">
             ## Bird Species Identification using Convolutional Neural Networks
           </script>
         </section>
 				<section data-markdown>
-          <script type=text/template">
+          <script type="text/template">
             ## Summary
 
             - Introduction
@@ -43,7 +44,19 @@
           </script>
         </section>
         <section>
-          <img src="images/PointCount.svg" height="100%" width ="100%">
+          <h3> Manual Point Count </h3>
+          <img src="images/GuyPointCount.svg" height="50%" width ="50%">
+          <aside class="notes">
+            These are the notes.
+          </aside>
+        </section>
+        <section>
+          <h3> Manual + Automatic Point Count </h3>
+          <img src="images/GuyPointCountMic.svg" height="50%" width ="50%">
+        </section>
+        <section>
+          <h3> Point Count </h3>
+          <img src="images/PointCount.svg" height="40%" width ="40%">
           <p class="fragment" data-audio-src="audio/bird1.ogg">
             Listen to birds
           </p>
@@ -53,7 +66,7 @@
           </p>
         </section>
 				<section data-markdown>
-          <script type=text/template">
+          <script type="text/template">
             ## Why is this important?
 
             - Indicator for health of an ecosystem
@@ -62,9 +75,126 @@
 
           </script>
         </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Problem formulation
+
+              - Signal Classification
+              - Feature Extraction
+
+            </script>
+          </section>
+          <section>
+            <h2> Signal Classification </h2>
+            <div>
+              \[ X = \{(y_i, x_i)\}, i=1, \dots, N \]
+            </div>
+            <div class="equation">
+            \[ w = \arg\min_{w} \sum_{(y, x) \in X} loss(f(x), f_w(x)) \]
+            </div>
+          </section>
+          <section>
+            <h2> Feature Extraction </h2>
+            <ul>
+              <li> Reduce the size of the input </li>
+              <li> Trade-off between separability and contraction </li>
+            </ul>
+            <div class="equation">
+              \[ \text{if } \Phi(x) \neq \Phi(x') \text{ then } f(x) \neq f(x') \]
+            </div>
+          </section>
+        </section>
+        <section>
+          <h2> Aim & Questions </h2>
+          <ul>
+            <li class="fragment"> Aim: Improve upon the state-of-the-art </li>
+            <li class="fragment">
+              Can deep residual neural networks learn to classify bird
+              species based on audio recordings, and how well do they perform?
+            </li>
+            <li class="fragment">
+              Can multiple-width frequency-delta data augmentation be used to
+              improve how well the model generalizes?
+            </li>
+            <li class="fragment">
+              Can meta-data fusion be used to improve the classification
+              accuracy of the model?
+            </li>
+          </ul>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Baseline
+              - Preprocessing
+              - Data augmentation
+              - Convolutional neural network
+            </script>
+          </section>
+          <section>
+            <h2> Preprocessing </h2>
+            <img src="images/sprengel_binary_mask.png" height="50%" width ="50%">
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Data Augmentation
+              - Same class
+              - Noise
+              - Time shift
+              - Pitch shift
+            </script>
+          </section>
+          <section>
+            <h2> Same Class Augmentation </h2>
+            <img src="images/same_class_augmentation.png" height="50%" width ="50%">
+          </section>
+          <section>
+            <h2> Noise Augmentation </h2>
+            <img src="images/noise_augmentation.png" height="50%" width ="50%">
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Convolutional neural network
+              - 5x BatchNormalization, Convolution2D, MaxPooling2D
+              - BatchNormalization
+              - Flatten
+              - Dropout (40%)
+              - Dense (1024 neurons)
+              - Dropout (40%)
+              - Dense (999 neurons)
+            </script>
+          </section>
+        </section>
+        <section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Methods
+
+              - Deep Residual Neural Networks
+              - Multiple-Width Frequency-Delta Data Augmentation
+              - Meta-Data Fusion
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Deep Residual Neural Networks
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Multiple-Width Frequency-Delta Data Augmentation
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Meta-Data Fusion
+            </script>
+          </section>
+
+        </section>
 			</div>
 		</div>
-
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
 
@@ -72,11 +202,16 @@
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+        audio : {
+          defaultDuration: 600
+        },
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/menu/menu.js' },
+					{ src: 'plugin/math/math.js', async: true },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           { src: 'plugin/audio-slideshow/slideshow-recorder.js', condition: function( ) { return !!document.body.classList; } },
