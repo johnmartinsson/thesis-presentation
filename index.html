@@ -8,7 +8,7 @@
 
 		<link rel="stylesheet" href="css/custom.css">
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/solarized.css">
+		<link rel="stylesheet" href="css/theme/solarized.css" id="theme">
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -51,19 +51,19 @@
           </aside>
         </section>
         <section>
-          <h3> Manual + Automatic Point Count </h3>
+          <h3> Automatic Point Count </h3>
           <img src="images/GuyPointCountMic.svg" height="50%" width ="50%">
+          <p class="fragment" data-audio-src="audio/bird1.ogg">
+            Listen to birds
+          </p>
+          <p class="fragment" data-audio-src="audio/bird2.ogg">
+          </p>
+          <p class="fragment" data-audio-src="audio/bird3.ogg">
+          </p>
         </section>
         <section>
           <h3> Point Count </h3>
           <img src="images/PointCount.svg" height="40%" width ="40%">
-          <p class="fragment" data-audio-src="audio/bird1.ogg">
-            Listen to birds
-          </p>
-          <p class="fragment" data-audio-src="audio/bird1.ogg">
-          </p>
-          <p class="fragment" data-audio-src="audio/bird1.ogg">
-          </p>
         </section>
 				<section data-markdown>
           <script type="text/template">
@@ -158,8 +158,12 @@
             </script>
           </section>
           <section>
-            <h4> Preprocessing </h4>
+            <h4> Detect Structure </h4>
             <img src="images/sprengel_binary_mask.png" height="40%" width ="40%">
+          </section>
+          <section>
+            <h4> Separate Signal and Noise </h4>
+            <img src="images/noise_signal.png" height="50%" width ="50%">
           </section>
           <section data-markdown>
             <script type="text/template">
