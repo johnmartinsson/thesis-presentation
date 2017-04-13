@@ -47,8 +47,16 @@
           <h3> Manual Point Count </h3>
           <img src="images/GuyPointCount.svg" height="50%" width ="50%">
           <aside class="notes">
-            These are the notes.
+            <ul>
+              <li> Requires expertise </li>
+              <li> Time consuming </li>
+              <li> Consistency is a necessity </li>
+            </ul>
           </aside>
+        </section>
+        <section>
+          <h3> Point Count Data </h3>
+          <img src="images/PointCount.svg" height="40%" width ="40%">
         </section>
         <section>
           <h3> Automatic Point Count </h3>
@@ -60,19 +68,26 @@
           </p>
           <p class="fragment" data-audio-src="audio/bird3.ogg">
           </p>
+          <aside class="notes">
+            <ul>
+              <li> Consistent and less biased </li>
+              <li> Requires no expertise </li>
+              <li> Can be paced for continuous monitoring </li>
+            </ul>
+          </aside>
         </section>
-        <section>
-          <h3> Point Count </h3>
-          <img src="images/PointCount.svg" height="40%" width ="40%">
-        </section>
-				<section data-markdown>
+				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
-            ## Why is this important?
+            ## Why birds and why is this important?
+            - Birds are easy to observe
+            - Indicators of ecosystem health
+            - Grounds for conservation effors
+            - Understand population health
 
-            - Indicator for health of an ecosystem
-            - Population dynamics
-            - Migration behaviours
-
+            Note:
+            - Pollinate
+            - Disperse seeds
+            - Pest control.
           </script>
         </section>
         <section>
@@ -135,6 +150,13 @@
               accuracy of the model?
             </li>
           </ul>
+          <aside class="notes">
+            <ul>
+              <li> Answered by training on a large data set </li>
+              <li> Evaluating on a large test set </li>
+              <li> Compare results with baseline </li>
+            </ul>
+          </aside>
         </section>
         <section data-markdown>
           <script type="text/template">
@@ -181,13 +203,26 @@
           <section>
             <h2> Noise Augmentation </h2>
             <img src="images/noise_augmentation.png" height="50%" width ="50%">
+            <aside class="notes">
+              <ul>
+                <li> Add three noise segments </li>
+                <li> Harder to classify </li>
+                <li> Noise invariant, Generalization </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2> Feature Extraction </h2>
             <p> Logarithmic spectrogram </p>
             <img src="images/logspectrogram.png" height="50%" width="50%">
+            <aside class="notes">
+              <ul>
+                <li> Data augmentation in time domain </li>
+                <li> Time-spectral representation </li>
+              </ul>
+            </aside>
           </section>
-          <section data-markdown>
+          <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
               ## Convolutional neural network
               - 5x BatchNormalization, Convolution2D, MaxPooling2D
@@ -197,6 +232,14 @@
               - Dense (1024 neurons)
               - Dropout (40%)
               - Dense (999 neurons)
+
+              Note:
+              - Bach normalization reduces the risk of vanishing/exploding
+              gradients/signals
+              - Convolving layers learns feature extraction mappings
+              - Max pooling reduces the size of the features
+              - Fully connected network learns to classify the extracted
+              features.
             </script>
           </section>
         </section>
@@ -210,20 +253,47 @@
               - Meta-data fusion
             </script>
           </section>
-          <section data-markdown>
-            <script type="text/template">
-              ## Deep residual neural networks
-            </script>
+          <section>
+            <h2> Deep residual neural networks </h2>
+            <ul>
+              <li> Introduce shortcuts </li>
+              <li> Allow training of very deep networks </li>
+            </ul>
           </section>
-          <section data-markdown>
-            <script type="text/template">
-              ## Multiple-width frequency-delta data augmentation
-            </script>
+          <section>
+            <h2> Shortcut </h2>
+            <img src="images/residual-function.png" height="50%" width ="50%">
+            <div class="fragment">
+              \[ y = \mathcal{H}(x) = \mathcal{F}(x) + x \]
+            </div>
+            <aside class="notes">
+              <ul>
+                <li> Closer to itentity mapping </li>
+              </ul>
+            </aside>
           </section>
-          <section data-markdown>
-            <script type="text/template">
-              ## Meta-data fusion
-            </script>
+          <section>
+            <h2> Multiple-width frequency-delta data augmentation </h2>
+            <ul>
+              <li> Mel-frequency cepstral coefficients (MFCCs) </li>
+              <li> Deltas of MFCCs </li>
+              <li> Input: \[ (MFCCs, \Delta3, \Delta11, \Delta19) \] </li>
+            </ul>
+          </section>
+          <section>
+            <h2> Meta-data fusion </h2>
+            <div>
+              \[
+              Pr(bird_i|elevation, song) = \\
+              \frac{Pr(bird_j|song)Pr(elevation|bird_j)}
+              {\sum_{i=1}^n Pr(bird_i|song)Pr(elevation|bird_i)}
+              \]
+            </div>
+            <aside class="notes">
+              <ul>
+                <li> Assumption: Pr(elevation|song,bird) = Pr(elevation|bird) </li>
+              </ul>
+            </aside>
           </section>
         </section>
         <section>
@@ -233,6 +303,26 @@
 
               - Deep residual neural networks
               - Meta-data fusion
+            </script>
+          </section>
+          <section data-markdown>
+            <script type="text/template">
+              ## Deep residual neural networks
+              | Method | MAP (with) | MAP (without) |
+              | --- | --- | --- |
+              | Baseline | 55.8% | 69.7% |
+              | Resnet 18 | 53.8% | 67.9% |
+            </script>
+          </section>
+          <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+            <script type="text/template">
+              ## Meta-data fusion
+              - Reduce coverage error by ~4
+              - MAP score is barely affected
+
+              Note:
+              - Ground truth labels are on average predicted higher
+              - Not high enough to affect the MAP score
             </script>
           </section>
         </section>
