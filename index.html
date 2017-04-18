@@ -44,12 +44,60 @@
           </script>
         </section>
         <section>
+          <h2> What are we trying to achieve? </h2>
+          <ul>
+            <li class="fragment">
+              Automatic classification of bird species based on audio recordings
+            </li>
+            <li class="fragment" data-audio-src="audio/bird1.ogg"> Listen to birds </li>
+            <li class="fragment" data-audio-src="audio/bird2.ogg"> Bird 1 </li>
+            <li class="fragment" data-audio-src="audio/bird3.ogg"> Bird 2 </li>
+            <li class="fragment"> Bird 3 </li>
+          </ul>
+        </section>
+				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+          <script type="text/template">
+            ## Why birds and why is this important?
+            - Birds are easy to observe
+            - Indicators of ecosystem health
+            - Conservation effors
+            - Population health
+
+            Note:
+            - Why is it important to solve the problem?
+              - Birds are important ecological indicators
+                - Changes in bird populations tell a story about the health of their
+                  environment. You could say that monitoring birds is a way of taking the
+                  pulse of nature.
+              - Conservation of birds is important because they
+                - Disperse seeds
+                - Pollinate plants
+                - Pest control
+                - Cultural values
+          </script>
+        </section>
+				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+          <script type="text/template">
+            ## How is this currently solved?
+            - Point counts
+            - Banding
+
+            Note:
+            - Banding is done by marking birds to enable tracking of individual
+            movements. This is an invasive, but not harmful, monitoring
+            technique, because you have to catch the birds in nets in order to
+            mark them.
+            - Will not go into this.
+          </script>
+        </section>
+        <section>
           <h3> Manual Point Count </h3>
-          <img src="images/GuyPointCount.svg" height="50%" width ="50%">
+          <img src="images/GuyPointCount.svg" height="60%" width ="60%">
           <aside class="notes">
             <ul>
               <li> Requires expertise </li>
               <li> Time consuming </li>
+              <li> Biased by the observer </li>
               <li> Consistency is a necessity </li>
             </ul>
           </aside>
@@ -58,37 +106,27 @@
           <h3> Point Count Data </h3>
           <img src="images/PointCount.svg" height="40%" width ="40%">
         </section>
+				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+          <script type="text/template">
+            ## How could this be solved?
+            - Automatic point counts
+              - Predict relative position of bird
+              - Predict the species of the singing bird
+
+            Note:
+            - Give man a microphone, and bird classification system
+          </script>
+        </section>
         <section>
           <h3> Automatic Point Count </h3>
-          <img src="images/GuyPointCountMic.svg" height="50%" width ="50%">
-          <p class="fragment" data-audio-src="audio/bird1.ogg">
-            Listen to birds
-          </p>
-          <p class="fragment" data-audio-src="audio/bird2.ogg">
-          </p>
-          <p class="fragment" data-audio-src="audio/bird3.ogg">
-          </p>
+          <img src="images/GuyPointCountMic.svg" height="60%" width ="60%">
           <aside class="notes">
             <ul>
-              <li> Consistent and less biased </li>
               <li> Requires no expertise </li>
+              <li> Consistent and less biased </li>
               <li> Can be paced for continuous monitoring </li>
             </ul>
           </aside>
-        </section>
-				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
-          <script type="text/template">
-            ## Why birds and why is this important?
-            - Birds are easy to observe
-            - Indicators of ecosystem health
-            - Grounds for conservation effors
-            - Understand population health
-
-            Note:
-            - Pollinate
-            - Disperse seeds
-            - Pest control.
-          </script>
         </section>
         <section>
           <section data-markdown>
@@ -131,7 +169,6 @@
               \]
             </div>
           </section>
-
         </section>
         <section>
           <h2> Aim & Questions </h2>
@@ -259,6 +296,12 @@
               <li> Introduce shortcuts </li>
               <li> Allow training of very deep networks </li>
             </ul>
+            <aside class="notes">
+              <ul>
+                <li> Shortcuts allow signal to flow more easily through the network </li>
+                <li> Deeper is better </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2> Shortcut </h2>
@@ -279,6 +322,12 @@
               <li> Deltas of MFCCs </li>
               <li> Input: \[ (MFCCs, \Delta3, \Delta11, \Delta19) \] </li>
             </ul>
+            <aside class="notes">
+              <ul>
+                <li> Compact feature representation </li>
+                <li> Delta gives dynamic information, trajectory </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2> Meta-data fusion </h2>
@@ -303,6 +352,7 @@
 
               - Deep residual neural networks
               - Meta-data fusion
+              - Data analysis
             </script>
           </section>
           <section data-markdown>
@@ -322,14 +372,47 @@
 
               Note:
               - Ground truth labels are on average predicted higher
+              - Coverage error from 25 to 21 (baseline)
+              - Coverage error from 28 to 24 (resnet)
               - Not high enough to affect the MAP score
             </script>
           </section>
+          <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+            <script type="text/template">
+              ## Data analysis
+              - Relative number of training samples is uneven
+              - Accuracy is uneven for different sound classes
+              - Overfitting to a sound class can be a problem
+            </script>
+          </section>
+          <section>
+            <img src="images/training_samples_by_number_of_predictions.png" height="60%" width ="60%">
+          </section>
+          <section>
+            <img src="images/descending_accuracy_cuberun.png" height="60%" width ="60%">
+          </section>
+          <section>
+            <img src="images/confusion_matrix_bot100_resnet_18_1.png" height="60%" width ="60%">
+          </section>
         </section>
         <section>
-          <section data-markdown>
+          <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
               ## Discussion
+              - Deep residual neural network can learn to classify bird species
+              based on bird song
+              - The accuracy is close to the state-of-the-art
+              - Meta-data fusion can be used to reduce coverage error
+
+              Note:
+                - The study shows that deep residual neural networks can learn to
+                classify bird species based on bird song and that the mean
+                average precision of the classifier nearly matches the
+                state-of-the-art.
+                - We further develop a proof of concept for meta-data fusion
+                which indicates that fusion of elevation data can be used to
+                increase the accuracy of the model, and in particular decrease
+                its coverage error.
             </script>
           </section>
         </section>
