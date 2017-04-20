@@ -58,10 +58,10 @@
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
             ## Why birds and why is this important?
-            - Birds are easy to observe
-            - Indicators of ecosystem health
-            - Conservation effors
-            - Population health
+            - Birds are easy to observe <!-- .element: class="fragment" -->
+            - Indicators of ecosystem health <!-- .element: class="fragment" -->
+            - Conservation effors <!-- .element: class="fragment" -->
+            - Population health <!-- .element: class="fragment" -->
 
             Note:
             - Why is it important to solve the problem?
@@ -133,8 +133,9 @@
             <script type="text/template">
               ## Problem formulation
 
-              - Signal Classification
-              - Feature Extraction
+              - Single-instance single-label <!-- .element: class="fragment" -->
+              - Signal Classification <!-- .element: class="fragment" -->
+              - Feature Extraction <!-- .element: class="fragment" -->
 
             </script>
           </section>
@@ -210,10 +211,10 @@
           <section data-markdown>
             <script type="text/template">
               ## Baseline
-              - Preprocessing
-              - Data augmentation
-              - Feature extraction
-              - Signal classification
+              - Preprocessing <!-- .element: class="fragment" -->
+              - Data augmentation <!-- .element: class="fragment" -->
+              - Feature extraction <!-- .element: class="fragment" -->
+              - Signal classification <!-- .element: class="fragment" -->
             </script>
           </section>
           <section>
@@ -299,7 +300,7 @@
             <aside class="notes">
               <ul>
                 <li> Shortcuts allow signal to flow more easily through the network </li>
-                <li> Deeper is better </li>
+                <li> Why? - deeper is better </li>
               </ul>
             </aside>
           </section>
@@ -312,6 +313,7 @@
             <aside class="notes">
               <ul>
                 <li> Closer to itentity mapping </li>
+                <li> Why? - assumed easier to learn the residual mapping </li>
               </ul>
             </aside>
           </section>
@@ -333,7 +335,7 @@
             <h2> Meta-data fusion </h2>
             <div>
               \[
-              Pr(bird_i|elevation, song) = \\
+              Pr(bird_j|elevation, song) = \\
               \frac{Pr(bird_j|song)Pr(elevation|bird_j)}
               {\sum_{i=1}^n Pr(bird_i|song)Pr(elevation|bird_i)}
               \]
@@ -367,8 +369,12 @@
           <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
               ## Meta-data fusion
-              - Reduce coverage error by ~4
-              - MAP score is barely affected
+              | Method | Coverage error (without fusion) | Coverage error (with fusion) |
+              | --- | --- | --- |
+              | Baseline | $25.3 \pm 0.3$ | $21.1 \pm 0.3$ |
+              | Resnet | $28.7 \pm 1.5$ | $24.7 \pm 1.2$ |
+              - Reduce coverage error by ~4 <!-- .element: class="fragment" -->
+              - MAP score is barely affected <!-- .element: class="fragment" -->
 
               Note:
               - Ground truth labels are on average predicted higher
@@ -380,16 +386,16 @@
           <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
               ## Data analysis
-              - Relative number of training samples is uneven
-              - Accuracy is uneven for different sound classes
-              - Overfitting to a sound class can be a problem
+              - Accuracy is uneven for different sound classes <!-- .element: class="fragment" -->
+              - Relative number of training samples is uneven <!-- .element: class="fragment" -->
+              - Overfitting to a sound class can be a problem <!-- .element: class="fragment" -->
             </script>
           </section>
           <section>
-            <img src="images/training_samples_by_number_of_predictions.png" height="60%" width ="60%">
+            <img src="images/descending_accuracy_cuberun.png" height="60%" width ="60%">
           </section>
           <section>
-            <img src="images/descending_accuracy_cuberun.png" height="60%" width ="60%">
+            <img src="images/training_samples_by_number_of_predictions.png" height="60%" width ="60%">
           </section>
           <section>
             <img src="images/confusion_matrix_bot100_resnet_18_1.png" height="60%" width ="60%">
