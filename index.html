@@ -30,7 +30,7 @@
             ## Bird Species Identification using Convolutional Neural Networks
           </script>
         </section>
-				<section data-markdown>
+				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
             ## Summary
 
@@ -41,6 +41,11 @@
             - Results
             - Discussion
             - Conclusions
+
+            Note:
+              - Introduction
+                - What we are trying to achieve
+                - Why it is useful
           </script>
         </section>
         <section>
@@ -92,7 +97,7 @@
         </section>
         <section>
           <h3> Manual Point Count </h3>
-          <img src="images/GuyPointCount.svg" height="60%" width ="60%">
+          <img src="images/GuyPointCount.svg" height="80%" width ="80%">
           <aside class="notes">
             <ul>
               <li> Requires expertise </li>
@@ -119,7 +124,7 @@
         </section>
         <section>
           <h3> Automatic Point Count </h3>
-          <img src="images/GuyPointCountMic.svg" height="60%" width ="60%">
+          <img src="images/GuyPointCountMic.svg" height="80%" width ="80%">
           <aside class="notes">
             <ul>
               <li> Requires no expertise </li>
@@ -155,8 +160,14 @@
               <li> Trade-off between separability and contraction </li>
             </ul>
             <div class="equation">
-              \[ \text{if } \Phi(x) \neq \Phi(x') \text{ then } f(x) \neq f(x') \]
+              \[ \Phi(x) \neq \Phi(x') \text{ if } f(x) \neq f(x') \]
             </div>
+            <aside class="notes">
+              <ul>
+                <li> Enable efficient training </li>
+                <li> Raw audio data not good </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h2> Feature Extraction </h2>
@@ -164,8 +175,8 @@
               \[
               \begin{aligned}
               \text{if } &amp; \Phi((x, y)) = x \text{ and } f((x, y)) = y \\
-              \text{ then } &amp; \Phi((1, 3)) \neq \Phi(2, 3) \\
-              \text{ but } &amp; f((1, 3)) = f((2, 3))
+              \text{ then } &amp; f((3, 1)) \neq f((3, 2)) \\
+              \text{ but } &amp; \Phi((3, 1)) = \Phi((3, 2)) \\
               \end{aligned}
               \]
             </div>
@@ -218,29 +229,24 @@
             </script>
           </section>
           <section>
-            <h4> Detect Structure </h4>
-            <img src="images/sprengel_binary_mask.png" height="40%" width ="40%">
+            <img src="images/sprengel_binary_mask.png" height="50%" width ="50%">
           </section>
           <section>
             <h4> Separate Signal and Noise </h4>
-            <img src="images/noise_signal.png" height="50%" width ="50%">
+            <img src="images/noise_signal.png" height="80%" width ="80%">
           </section>
           <section data-markdown>
             <script type="text/template">
               ## Data Augmentation
-              - Same class
-              - Noise
-              - Time shift
-              - Pitch shift
             </script>
           </section>
           <section>
-            <h2> Same Class Augmentation </h2>
-            <img src="images/same_class_augmentation.png" height="50%" width ="50%">
+            <h4> Data Augmentation: Same Class</h4>
+            <img src="images/same_class_augmentation.png" height="80%" width ="80%">
           </section>
           <section>
-            <h2> Noise Augmentation </h2>
-            <img src="images/noise_augmentation.png" height="50%" width ="50%">
+            <h4> Data Augmentation: Noise </h4>
+            <img src="images/noise_augmentation.png" height="80%" width ="80%">
             <aside class="notes">
               <ul>
                 <li> Add three noise segments </li>
@@ -251,14 +257,16 @@
           </section>
           <section>
             <h2> Feature Extraction </h2>
-            <p> Logarithmic spectrogram </p>
-            <img src="images/logspectrogram.png" height="50%" width="50%">
+            <img src="images/logspectrogram.png" height="80%" width="80%">
             <aside class="notes">
               <ul>
                 <li> Data augmentation in time domain </li>
                 <li> Time-spectral representation </li>
               </ul>
             </aside>
+          </section>
+          <section>
+						<a title="By Aphex34 (Own work) [CC BY-SA 4.0 (http://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3ATypical_cnn.png"><img width="512" alt="Typical cnn" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Typical_cnn.png/512px-Typical_cnn.png"/></a>
           </section>
           <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
@@ -346,6 +354,15 @@
               </ul>
             </aside>
           </section>
+          <section>
+            <h2> Pseudo probability </h2>
+          </section>
+          <!--
+          <section data-state="mixtureDensity">
+            <div id="mixtureDensitySvg"></div>
+            <input type="range" id="nrOfElevations" value=10 onmouseup="redrawMixtureDensity()">
+          </section>
+          -->
         </section>
         <section>
           <section data-markdown>
@@ -392,13 +409,15 @@
             </script>
           </section>
           <section>
-            <img src="images/descending_accuracy_cuberun.png" height="60%" width ="60%">
+            <img src="images/descending_accuracy_cuberun.png" height="80%" width ="80%">
           </section>
           <section>
-            <img src="images/training_samples_by_number_of_predictions.png" height="60%" width ="60%">
+            <img src="images/training_samples_by_number_of_predictions.png"
+            height="80%" width ="80%">
           </section>
           <section>
-            <img src="images/confusion_matrix_bot100_resnet_18_1.png" height="60%" width ="60%">
+            <img src="images/confusion_matrix_bot100_resnet_18_1.png"
+            height="80%" width ="80%">
           </section>
         </section>
         <section>
@@ -425,8 +444,7 @@
 			</div>
 		</div>
 		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
-
+		<script src="js/reveal.min.js"></script>
 		<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
@@ -448,5 +466,87 @@
 				]
 			});
 		</script>
+    <!--
+		<script src="js/d3.v4.min.js"></script>
+    -->
+    <!-- Mixture density visualization -->
+    <!--
+    <script type="text/javascript">
+      function redrawMixtureDensity() {
+        nrOfElevations = document.getElementById("nrOfElevations").value;
+        var svg = d3.select("#mixtureDensitySvg").transition();
+        console.log("Redraw:", nrOfElevations)
+      }
+    </script>
+		<script type="text/javascript">
+			//------ code to show D3 Bar Chart on First Slide-------
+      Reveal.addEventListener('mixtureDensity', function() {
+        var margin = {top: 20, right:20, bottom:20, left: 20}
+        var width = 600 - margin.left - margin.right;
+        var height = 300 - margin.top - margin.bottom;
+
+        // Set ranges
+        var x = d3.scaleTime().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        var valueline = d3.line()
+          .x(function(d) { return x(d.x) })
+          .y(function(d) { return y(d.y) });
+
+        var svg = d3.select("#mixtureDensitySvg")
+          .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+          .append("g")
+          .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        var data = [
+          {x: 0, y: 0},
+          {x: 1, y: 0},
+          {x: 2, y: 0},
+          {x: 3, y: 1},
+          {x: 4, y: 3},
+          {x: 5, y: 5},
+          {x: 6, y: 4},
+          {x: 7, y: 3},
+          {x: 8, y: 2},
+          {x: 9, y: 1},
+          {x: 10, y: 0},
+        ];
+
+        var data2 = [
+          {x: 0, y: 2},
+          {x: 1, y: 2},
+          {x: 2, y: 2},
+          {x: 3, y: 2},
+          {x: 4, y: 2},
+          {x: 5, y: 2},
+          {x: 6, y: 2},
+          {x: 7, y: 2},
+          {x: 8, y: 2},
+          {x: 9, y: 2},
+          {x: 10, y: 2},
+        ];
+        x.domain(d3.extent(data, function(d) { return d.x; }));
+        y.domain([0, d3.max(data, function(d) { return d.y })]);
+
+        //svg.append("path")
+        //  .data([data])
+        //  .attr("class", "line")
+        //  .attr("d", valueline);
+        svg.append("path")
+          .data([data2])
+          .attr("class", "line")
+          .attr("d", valueline);
+        svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+        svg.append("g")
+          .call(d3.axisLeft(y));
+      });
+		</script>
+  -->
+
 	</body>
 </html>
