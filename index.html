@@ -39,7 +39,6 @@
             - Aim and Questions
             - Methods
             - Results
-            - Discussion
             - Conclusions
 
             Note:
@@ -62,38 +61,44 @@
         </section>
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
-            ## Why birds and why is this important?
+            ## Why birds?
             - Birds are easy to observe <!-- .element: class="fragment" -->
-            - Indicators of ecosystem health <!-- .element: class="fragment" -->
-            - Conservation effors <!-- .element: class="fragment" -->
-            - Population health <!-- .element: class="fragment" -->
+            - Indicators of ecosystem health and changes <!-- .element: class="fragment" -->
+            - Conservation efforts <!-- .element: class="fragment" -->
+            - Bird population health <!-- .element: class="fragment" -->
 
             Note:
             - Why is it important to solve the problem?
+              - Easy to observe: has made them a standard indicator of ecosystem
+              health and changes.
               - Birds are important ecological indicators
                 - Changes in bird populations tell a story about the health of their
                   environment. You could say that monitoring birds is a way of taking the
                   pulse of nature.
-              - Conservation of birds is important because they
+              - Knowing which birds and environments are at risk allows informed
+              decisions for conservation efforts
+              - The health of bird populations is important because they
                 - Disperse seeds
                 - Pollinate plants
                 - Pest control
-                - Cultural values
           </script>
         </section>
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
             ## How is this currently solved?
-            - Point counts
-            - Banding
-
-            Note:
-            - Banding is done by marking birds to enable tracking of individual
-            movements. This is an invasive, but not harmful, monitoring
-            technique, because you have to catch the birds in nets in order to
-            mark them.
-            - Will not go into this.
           </script>
+        </section>
+        <section>
+          <h3>Banding </h3>
+          <a title="By Júlio Reis (User:Tintazul) (Original File) [CC BY-SA 2.5 (http://creativecommons.org/licenses/by-sa/2.5)], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3ARinging_04_Ringing.jpg"><img width="512" alt="Ringing 04 Ringing" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ringing_04_Ringing.jpg/512px-Ringing_04_Ringing.jpg"/></a>
+          <aside class="notes">
+            <p>
+              Banding is done by marking birds to enable tracking of individual
+              movements. This is an invasive, but not harmful, monitoring
+              technique, because you have to catch the birds in nets in order to
+              mark them.
+            </p>
+          </aside>
         </section>
         <section>
           <h3> Manual Point Count </h3>
@@ -114,12 +119,6 @@
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
             ## How could this be solved?
-            - Automatic point counts
-              - Predict relative position of bird
-              - Predict the species of the singing bird
-
-            Note:
-            - Give man a microphone, and bird classification system
           </script>
         </section>
         <section>
@@ -127,6 +126,10 @@
           <img src="images/GuyPointCountMic.svg" height="80%" width ="80%">
           <aside class="notes">
             <ul>
+              <li>Give man a microphone, and bird classification system</li>
+              <li>Automatic point counts </li>
+              <li>Predict relative position of bird</li>
+              <li>Predict the species of the singing bird</li>
               <li> Requires no expertise </li>
               <li> Consistent and less biased </li>
               <li> Can be paced for continuous monitoring </li>
@@ -137,11 +140,6 @@
           <section data-markdown>
             <script type="text/template">
               ## Problem formulation
-
-              - Single-instance single-label <!-- .element: class="fragment" -->
-              - Signal Classification <!-- .element: class="fragment" -->
-              - Feature Extraction <!-- .element: class="fragment" -->
-
             </script>
           </section>
           <section>
@@ -182,31 +180,6 @@
             </div>
           </section>
         </section>
-        <section>
-          <h2> Aim & Questions </h2>
-          <ul>
-            <li class="fragment"> Aim: Improve upon the state-of-the-art </li>
-            <li class="fragment">
-              Can deep residual neural networks learn to classify bird
-              species based on audio recordings, and how well do they perform?
-            </li>
-            <li class="fragment">
-              Can multiple-width frequency-delta data augmentation be used to
-              improve how well the model generalizes?
-            </li>
-            <li class="fragment">
-              Can meta-data fusion be used to improve the classification
-              accuracy of the model?
-            </li>
-          </ul>
-          <aside class="notes">
-            <ul>
-              <li> Answered by training on a large data set </li>
-              <li> Evaluating on a large test set </li>
-              <li> Compare results with baseline </li>
-            </ul>
-          </aside>
-        </section>
         <section data-markdown>
           <script type="text/template">
             ## Data set
@@ -219,21 +192,43 @@
           </script>
         </section>
         <section>
-          <section data-markdown>
+          <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
               ## Baseline
               - Preprocessing <!-- .element: class="fragment" -->
               - Data augmentation <!-- .element: class="fragment" -->
               - Feature extraction <!-- .element: class="fragment" -->
               - Signal classification <!-- .element: class="fragment" -->
+
+              Note:
+              - Lets look at the baseline which we want to improve upon
             </script>
           </section>
           <section>
             <img src="images/sprengel_binary_mask.png" height="50%" width ="50%">
+            <aside class="notes">
+              <ul>
+                <li> Find bird vocals </li>
+                <li> Compute amplitude spectrogram of recording </li>
+                <li> Find parts with high energy using a median clipping </li>
+                <li> Apply an erosion filter to filter out the regions with
+                  most energy </li>
+                <li> Perform a dilation filter to highlight these regions </li>
+                <li> Columns with at least one non-zero value (black pixel) are
+                  marked as bird vocals, or signal </li>
+                <li> Other parts are marked as noise </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <h4> Separate Signal and Noise </h4>
             <img src="images/noise_signal.png" height="80%" width ="80%">
+            <aside class="notes">
+              <ul>
+                <li> We use this to extract the signal and noise part of the
+                  audio recording </li>
+              </ul>
+            </aside>
           </section>
           <section data-markdown>
             <script type="text/template">
@@ -266,7 +261,25 @@
             </aside>
           </section>
           <section>
-						<a title="By Aphex34 (Own work) [CC BY-SA 4.0 (http://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3ATypical_cnn.png"><img width="512" alt="Typical cnn" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Typical_cnn.png/512px-Typical_cnn.png"/></a>
+            <h3> Convolutional Neural Network </h3>
+						<a title="By Aphex34 (Own work) [CC BY-SA 4.0 (http://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons"
+               href="https://commons.wikimedia.org/wiki/File%3ATypical_cnn.png">
+              <img width="100%" alt="Typical cnn" src="images/typical_cnn.png"/>
+            </a>
+            <aside class="notes">
+              <ul>
+                <li> Convolving layers learns to extract relevant features from
+                  the input </li>
+                <li> Pooling layers reduces the size of the input </li>
+                <li> Batch normalization reduces the risk of vanishing or
+                  exploding gradients </li>
+                <li> The final feature maps are used as input to a fully
+                  connected neural network which is the part that actually
+                  learns to classify the audio recording </li>
+                <li> The fully connected network has a dropout rate of 40% to
+                  improve generalization </li>
+              </ul>
+            </aside>
           </section>
           <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
@@ -290,17 +303,43 @@
           </section>
         </section>
         <section>
+          <h2> Goal of the Thesis </h2>
+          <ul>
+            <li class="fragment"> Goal: Improve upon the state-of-the-art baseline</li>
+            <li class="fragment">
+              New convolutional neural network architecture
+            </li>
+            <li class="fragment">
+              New data augmentation technique
+            </li>
+            <li class="fragment">
+              Meta-data fusion
+            </li>
+            <li class="fragment">
+              Question: Can these techniques be used to improve classification accuracy?
+            </li>
+          </ul>
+          <aside class="notes">
+            <ul>
+              <li> We have looked at a new convolutional neural network
+                architecture called deep residual neural networks, a new data
+                augmentation technique called multiple-width frequency-delta
+                augmentaion, and a way of using other information, in addition
+                to the audio recording, to classify the sining bird. </li>
+              <li> Answered by training on a large data set </li>
+              <li> Evaluating on a large test set </li>
+              <li> Compare results with baseline </li>
+            </ul>
+          </aside>
+        </section>
+        <section>
           <section data-markdown>
             <script type="text/template">
               ## Methods
-
-              - Deep residual neural networks
-              - Multiple-width frequency-delta data augmentation
-              - Meta-data fusion
             </script>
           </section>
           <section>
-            <h2> Deep residual neural networks </h2>
+            <h2> Network architecture: deep residual neural networks </h2>
             <ul>
               <li> Introduce shortcuts </li>
               <li> Allow training of very deep networks </li>
@@ -320,22 +359,27 @@
             </div>
             <aside class="notes">
               <ul>
-                <li> Closer to itentity mapping </li>
+                <li> Reason: optimal mapping are usually closer to the identity
+                  mapping, than the zero mapping, meaning that it is easier to
+                  learn the difference between identity mapping and the optimal
+                mapping, than the zero mapping and the optimal mapping </li>
                 <li> Why? - assumed easier to learn the residual mapping </li>
               </ul>
             </aside>
           </section>
           <section>
-            <h2> Multiple-width frequency-delta data augmentation </h2>
-            <ul>
-              <li> Mel-frequency cepstral coefficients (MFCCs) </li>
-              <li> Deltas of MFCCs </li>
-              <li> Input: \[ (MFCCs, \Delta3, \Delta11, \Delta19) \] </li>
-            </ul>
+            <h4> Data augmentation: Multiple-width frequency-delta </h4>
+            <img src="images/mwfd.png" width ="100%">
+            <p style="font-size:30%"> Image source: Yoonchang Han and Kyogu Lee. Acoustic scene classification using convolutional neural network and multiple-width frequency-delta data augmentation. 14(8):1–11, 2016 </p>
             <aside class="notes">
               <ul>
+                <li> Mel-frequency cepstral coefficients (MFCCs) </li>
                 <li> Compact feature representation </li>
+                <li> Deltas of MFCCs </li>
                 <li> Delta gives dynamic information, trajectory </li>
+                <li> First order frame-to-frame difference </li>
+                <li> Width determines the number of frames used to compute the
+                  deltas </li>
               </ul>
             </aside>
           </section>
@@ -356,27 +400,56 @@
           </section>
           <section>
             <h2> Pseudo probability </h2>
+            <div>
+            \[Pr(bird_j | song) \]
+            </div>
+						<a title="By Aphex34 (Own work) [CC BY-SA 4.0 (http://creativecommons.org/licenses/by-sa/4.0)], via Wikimedia Commons"
+               href="https://commons.wikimedia.org/wiki/File%3ATypical_cnn.png">
+              <img width="100%" alt="Typical cnn" src="images/typical_cnn.png"/>
+            </a>
+            <aside class="notes">
+              <ul>
+                <li>
+                Computed by convolutional neural network. Output of the last 999
+                neurons (normalized to sum to 1)
+                </li>
+                <li> Pr(bird j | song) is the output of the j:th neuron of the
+                  network </li>
+              </ul>
+            </aside>
           </section>
-          <!--
-          <section data-state="mixtureDensity">
-            <div id="mixtureDensitySvg"></div>
-            <input type="range" id="nrOfElevations" value=10 onmouseup="redrawMixtureDensity()">
+          <section>
+            <h2> Elevation likelihood </h2>
+            <img src="images/elevation_histogram.png" height="60%" width ="60%">
           </section>
-          -->
+          <section>
+            <h2> Elevation likelihood </h2>
+            <div>
+            \[Pr(elevation | bird_j) \]
+            </div>
+            <img src="images/mixture_density.png" height="60%" width ="60%">
+            <aside class="notes">
+              <ul>
+                <li> Gaussian modeled by computing mean and standard deviation
+                  of the available elevations for the bird species </li>
+                <li> Mixture density of Gaussian and Uniform </li>
+                <li> Tending towards the uniform if we have a small amount of
+                  elevation data for the species </li>
+                <li> Tending towads the Gaussian if the have a large amount of
+                  elevation data for the species </li>
+              </ul>
+            </aside>
+          </section>
         </section>
         <section>
           <section data-markdown>
             <script type="text/template">
               ## Results
-
-              - Deep residual neural networks
-              - Meta-data fusion
-              - Data analysis
             </script>
           </section>
           <section data-markdown>
             <script type="text/template">
-              ## Deep residual neural networks
+              ## Deep residual neural network
               | Method | MAP (with) | MAP (without) |
               | --- | --- | --- |
               | Baseline | 55.8% | 69.7% |
@@ -402,28 +475,40 @@
           </section>
           <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
-              ## Data analysis
-              - Accuracy is uneven for different sound classes <!-- .element: class="fragment" -->
-              - Relative number of training samples is uneven <!-- .element: class="fragment" -->
-              - Overfitting to a sound class can be a problem <!-- .element: class="fragment" -->
+              ## What could the problems be?
             </script>
           </section>
           <section>
             <img src="images/descending_accuracy_cuberun.png" height="80%" width ="80%">
+            <aside class="notes">
+              <ul>
+                <li> Accuracy is uneven for different sound classes </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <img src="images/training_samples_by_number_of_predictions.png"
             height="80%" width ="80%">
+            <aside class="notes">
+              <ul>
+                <li> Relative number of training samples is uneven </li>
+              </ul>
+            </aside>
           </section>
           <section>
             <img src="images/confusion_matrix_bot100_resnet_18_1.png"
             height="80%" width ="80%">
+            <aside class="notes">
+              <ul>
+                <li> Overfitting to a sound class can be a problem </li>
+              </ul>
+            </aside>
           </section>
         </section>
         <section>
           <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
             <script type="text/template">
-              ## Discussion
+              ## Conclusions
               - Deep residual neural network can learn to classify bird species
               based on bird song
               - The accuracy is close to the state-of-the-art
@@ -438,6 +523,14 @@
                 which indicates that fusion of elevation data can be used to
                 increase the accuracy of the model, and in particular decrease
                 its coverage error.
+            </script>
+          </section>
+          <section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
+            <script type="text/template">
+              ## Way forward
+              - Find a way to mitigate the problem of the uneven data set <!-- .element: class="fragment" -->
+              - Modify the loss function to also consider background species <!-- .element: class="fragment" -->
+              - Tune the hyperparameters of the residual neural networks <!-- .element: class="fragment" -->
             </script>
           </section>
         </section>
@@ -466,87 +559,5 @@
 				]
 			});
 		</script>
-    <!--
-		<script src="js/d3.v4.min.js"></script>
-    -->
-    <!-- Mixture density visualization -->
-    <!--
-    <script type="text/javascript">
-      function redrawMixtureDensity() {
-        nrOfElevations = document.getElementById("nrOfElevations").value;
-        var svg = d3.select("#mixtureDensitySvg").transition();
-        console.log("Redraw:", nrOfElevations)
-      }
-    </script>
-		<script type="text/javascript">
-			//------ code to show D3 Bar Chart on First Slide-------
-      Reveal.addEventListener('mixtureDensity', function() {
-        var margin = {top: 20, right:20, bottom:20, left: 20}
-        var width = 600 - margin.left - margin.right;
-        var height = 300 - margin.top - margin.bottom;
-
-        // Set ranges
-        var x = d3.scaleTime().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
-
-        var valueline = d3.line()
-          .x(function(d) { return x(d.x) })
-          .y(function(d) { return y(d.y) });
-
-        var svg = d3.select("#mixtureDensitySvg")
-          .append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-          .append("g")
-          .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
-
-        var data = [
-          {x: 0, y: 0},
-          {x: 1, y: 0},
-          {x: 2, y: 0},
-          {x: 3, y: 1},
-          {x: 4, y: 3},
-          {x: 5, y: 5},
-          {x: 6, y: 4},
-          {x: 7, y: 3},
-          {x: 8, y: 2},
-          {x: 9, y: 1},
-          {x: 10, y: 0},
-        ];
-
-        var data2 = [
-          {x: 0, y: 2},
-          {x: 1, y: 2},
-          {x: 2, y: 2},
-          {x: 3, y: 2},
-          {x: 4, y: 2},
-          {x: 5, y: 2},
-          {x: 6, y: 2},
-          {x: 7, y: 2},
-          {x: 8, y: 2},
-          {x: 9, y: 2},
-          {x: 10, y: 2},
-        ];
-        x.domain(d3.extent(data, function(d) { return d.x; }));
-        y.domain([0, d3.max(data, function(d) { return d.y })]);
-
-        //svg.append("path")
-        //  .data([data])
-        //  .attr("class", "line")
-        //  .attr("d", valueline);
-        svg.append("path")
-          .data([data2])
-          .attr("class", "line")
-          .attr("d", valueline);
-        svg.append("g")
-          .attr("transform", "translate(0," + height + ")")
-          .call(d3.axisBottom(x));
-        svg.append("g")
-          .call(d3.axisLeft(y));
-      });
-		</script>
-  -->
-
 	</body>
 </html>
