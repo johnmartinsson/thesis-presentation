@@ -25,9 +25,16 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section data-markdown>
+				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
             ## Bird Species Identification using Convolutional Neural Networks
+
+            Note:
+
+            - Text: Hello and welcome to this presentation on bird species
+            identification using convolutional neural networks. My name is John
+            Martinsson and I have conducted this study together with my
+            supervisor Alexander Schliep.
           </script>
         </section>
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
@@ -36,7 +43,9 @@
 
             - Introduction
             - Problem Formulation
-            - Aim and Questions
+            - Data set
+            - Baseline
+            - Goal & Questions
             - Methods
             - Results
             - Conclusions
@@ -45,19 +54,40 @@
               - Introduction
                 - What we are trying to achieve
                 - Why it is useful
+              - Text: Lets first go through what this presentation will contain.
+              First we will go through a short introduction to understand what
+              the problem is, and why it is important to solve it. Then we will
+              formulate the problem more specifically, look at the data set
+              which will be used, and go through the baseline which our results are
+              compared against. We will then look at the goal and questions for
+              the thesis, the methods used to achieve these goals, and the
+              results for the methods. We will end with a short conclusion.
           </script>
         </section>
         <section>
           <h2> What are we trying to achieve? </h2>
           <ul>
             <li class="fragment">
-              Automatic classification of bird species based on audio recordings
+              Identify the most prominently singing bird in an audio recording
             </li>
             <li class="fragment" data-audio-src="audio/bird1.ogg"> Listen to birds </li>
             <li class="fragment" data-audio-src="audio/bird2.ogg"> Bird 1 </li>
             <li class="fragment" data-audio-src="audio/bird3.ogg"> Bird 2 </li>
             <li class="fragment"> Bird 3 </li>
           </ul>
+          <aside class="notes">
+            <ul>
+              <li> Text: We want to be able to identify the most prominently
+                singing bird in an audio recording. So given a recording of a
+                bird singing in the wild, we would like a classifier to be able
+                to output which bird species is singing. In order to get a
+                better understanding of why this can be solved using sound we
+                will now listen to three different bird species singing... Each
+                of the birds have a very characteristic song, and since a human
+                can learn to identify them on song, it is reasonable to think
+                that it can be done with a machine as well.
+            </ul>
+          </aside>
         </section>
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
@@ -71,10 +101,10 @@
             - Why is it important to solve the problem?
               - Easy to observe: has made them a standard indicator of ecosystem
               health and changes.
-              - Birds are important ecological indicators
-                - Changes in bird populations tell a story about the health of their
-                  environment. You could say that monitoring birds is a way of taking the
-                  pulse of nature.
+              - Birds are important ecological indicators. Changes in bird populations tell a story about the health of their
+              environment.
+              - Incline and decline in populations tell a story about what
+              envionments are at risk and needs conservation.
               - Knowing which birds and environments are at risk allows informed
               decisions for conservation efforts
               - The health of bird populations is important because they
@@ -93,10 +123,10 @@
           <a title="By Júlio Reis (User:Tintazul) (Original File) [CC BY-SA 2.5 (http://creativecommons.org/licenses/by-sa/2.5)], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3ARinging_04_Ringing.jpg"><img width="512" alt="Ringing 04 Ringing" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ringing_04_Ringing.jpg/512px-Ringing_04_Ringing.jpg"/></a>
           <aside class="notes">
             <p>
-              Banding is done by marking birds to enable tracking of individual
-              movements. This is an invasive, but not harmful, monitoring
-              technique, because you have to catch the birds in nets in order to
-              mark them.
+              One is banding of birds where small metal rings are placed around
+              their feet to allow tracking of individuals and bird populations.
+              This can also indicate the diversity of birds in an area, and
+              the size of the population.
             </p>
           </aside>
         </section>
@@ -115,6 +145,11 @@
         <section>
           <h3> Point Count Data </h3>
           <img src="images/PointCount.svg" height="40%" width ="40%">
+          <aside class="notes">
+            <p> Example of a data point collected during a point count. With
+            many such counts it is possible to get a good understanding of the
+            bird population in the surveyed area.</p>
+          </aside>
         </section>
 				<section data-markdown data-separator="^\n\n\n" data-separator-vertical="^\n\n" data-separator-notes="^Note:">
           <script type="text/template">
@@ -238,6 +273,11 @@
           <section>
             <h4> Data Augmentation: Same Class</h4>
             <img src="images/same_class_augmentation.png" height="80%" width ="80%">
+            <aside class="notes">
+              <p> We randomly choose two segments from the same class and then
+              add them together. We weigh the signals using a randomly chosen
+              alpha value. </p>
+            </aside>
           </section>
           <section>
             <h4> Data Augmentation: Noise </h4>
@@ -420,6 +460,9 @@
           </section>
           <section>
             <h2> Elevation likelihood </h2>
+            <div>
+            \[Pr(elevation | bird_j) \]
+            </div>
             <img src="images/elevation_histogram.png" height="60%" width ="60%">
           </section>
           <section>
